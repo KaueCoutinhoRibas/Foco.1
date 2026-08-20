@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#111214" />
+    <meta name="description" content="Seu painel pessoal de produtividade." />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="icon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Foco — Produtividade</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand">foco<span>.</span></div>
+        <button class="icon-button" id="installButton" aria-label="Instalar aplicativo" hidden>↓</button>
+      </header>
+
+      <section id="todayView" class="view active">
+        <header class="intro">
+          <p class="eyebrow" id="currentDate"></p>
+          <h1 id="greeting">Bom dia.</h1>
+        </header>
+
+        <section class="progress-card" aria-labelledby="progressTitle">
+          <div class="section-row"><p id="progressTitle" class="eyebrow">PROGRESSO DO DIA</p><strong id="progressPercent">0%</strong></div>
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+          <p class="muted" id="progressDetail">Comece pelo próximo passo.</p>
+        </section>
+
+        <section class="section" aria-labelledby="tasksTitle">
+          <div class="section-row"><h2 id="tasksTitle">Tarefas</h2><button class="text-button" id="addTask">+ Adicionar</button></div>
+          <div class="list" id="taskList"></div>
+          <form class="add-form" id="taskForm" hidden>
+            <input id="taskInput" maxlength="120" placeholder="O que precisa ser feito?" autocomplete="off" />
+            <button type="submit" class="accent-button">Salvar</button>
+          </form>
+        </section>
+
+        <section class="section" aria-labelledby="habitsTitle">
+          <div class="section-row"><h2 id="habitsTitle">Hábitos</h2><span class="muted" id="habitsCount"></span></div>
+          <div class="list" id="habitList"></div>
+        </section>
+
+        <section class="streak-card" aria-label="Sequência atual"><span aria-hidden="true">🔥</span><div><strong id="streakCount">0 dias</strong><p class="muted">de consistência</p></div></section>
+
+        <section class="section notes-section" aria-labelledby="notesTitle">
+          <p class="eyebrow" id="notesTitle">NOTAS DE HOJE</p>
+          <textarea id="notesInput" maxlength="3000" placeholder="Registre o que importa…"></textarea>
+        </section>
+      </section>
+
+      <section id="historyView" class="view">
+        <header class="intro compact"><p class="eyebrow">SEU RITMO</p><h1>Histórico</h1></header>
+        <div class="history-list" id="historyList"></div>
+        <article class="history-detail" id="historyDetail" hidden></article>
+      </section>
+
+      <section id="settingsView" class="view">
+        <header class="intro compact"><p class="eyebrow">PERSONALIZE</p><h1>Ajustes</h1></header>
+        <section class="section"><div class="section-row"><h2>Meus hábitos</h2><button class="text-button" id="addHabit">+ Novo</button></div><div class="list" id="habitSettings"></div>
+          <form class="add-form habit-form" id="habitForm" hidden><input id="habitTitle" maxlength="60" placeholder="Nome do hábito" /><input id="habitTarget" type="number" min="1" max="999" value="1" aria-label="Meta" /><button class="accent-button" type="submit">Salvar</button></form>
+        </section>
+        <section class="section settings-actions"><p class="eyebrow">SEUS DADOS</p><button id="exportData">Exportar backup</button><label class="file-button">Importar backup<input id="importData" type="file" accept="application/json" /></label><button class="danger-button" id="clearData">Limpar todos os dados</button></section>
+      </section>
+    </main>
+
+    <nav class="tabbar" aria-label="Navegação principal">
+      <button class="tab active" data-view="todayView" aria-label="Hoje"><span>◉</span>Hoje</button>
+      <button class="tab" data-view="historyView" aria-label="Histórico"><span>◷</span>Histórico</button>
+      <button class="tab" data-view="settingsView" aria-label="Ajustes"><span>⚙</span>Ajustes</button>
+    </nav>
+    <div class="toast" id="toast" role="status"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
